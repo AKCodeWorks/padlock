@@ -1,6 +1,16 @@
 {
 	"name": "@akcodeworks/padlock",
 	"version": "0.0.1",
+	"license": "MIT",
+	"author": "iatrophobic",
+	"publishConfig": {
+		"access": "public"
+	},
+	"description": "A simple OAuth2 provider for sveltekit",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/akcodeworks/padlock.git"
+	},
 	"scripts": {
 		"dev": "bun --bun vite dev",
 		"build": "bun --bun vite build && npm run prepack",
@@ -66,7 +76,17 @@
 		"vitest": "^4.0.15"
 	},
 	"keywords": [
-		"svelte"
+		"svelte",
+		"sveltekit",
+		"authentication",
+		"authorization",
+		"oauth",
+		"oauth2",
+		"pkce",
+		"jwt",
+		"identity",
+		"auth",
+		"security"
 	],
 	"dependencies": {
 		"jsonwebtoken": "^9.0.3"
