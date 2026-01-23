@@ -1,12 +1,12 @@
 {
 	"name": "@akcodeworks/padlock",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": "MIT",
-	"author": "iatrophobic",
+	"author": "AKCodeWorks",
 	"publishConfig": {
 		"access": "public"
 	},
-	"description": "A simple OAuth2 provider for sveltekit",
+	"description": "A simple OAuth2 provider for SvelteKit",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/akcodeworks/padlock.git"
@@ -27,6 +27,8 @@
 	},
 	"files": [
 		"dist",
+		"!dist/assets/**",
+		"!dist/dev/**",
 		"!dist/**/*.test.*",
 		"!dist/**/*.spec.*"
 	],
@@ -89,6 +91,7 @@
 		"security"
 	],
 	"dependencies": {
+		"jsdom": "^27.4.0",
 		"jsonwebtoken": "^9.0.3"
 	}
 }

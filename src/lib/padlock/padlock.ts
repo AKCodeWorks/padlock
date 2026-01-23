@@ -165,13 +165,15 @@ export class Padlock<
         })
 
         const redirectUri =
-          providerConfig.redirectUri ??
+          providerConfig?.redirectUri ??
           `${this.config.baseUrl}/auth/callback`
-        const scope =
-          providerConfig.scopes?.join(" ") ?? providerConfig.scope ?? ""
+        const scope = [
+          ...(provider.defaultScopes ?? []),
+          ...(providerConfig?.scopes ?? [])
+        ].join(" ")
 
         const params = new URLSearchParams({
-          client_id: providerConfig.clientId,
+          client_id: providerConfig?.clientId ?? "",
           redirect_uri: redirectUri,
           response_type: "code",
           scope,
@@ -180,10 +182,15 @@ export class Padlock<
           code_challenge_method: "S256"
         })
 
+        const authorizeUrl =
+          typeof provider.authorizeUrl === "function"
+            ? provider.authorizeUrl(providerConfig as NonNullable<typeof providerConfig>)
+            : provider.authorizeUrl
+
         return new Response(null, {
           status: 302,
           headers: {
-            Location: `${provider.authorizeUrl}?${params}`
+            Location: `${authorizeUrl}?${params}`
           }
         })
       }

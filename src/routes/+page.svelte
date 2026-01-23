@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { createSignin } from '$lib/padlock/signin.js';
+	import { createSignin } from '$lib/client.js';
 
 	type AuthProviders = {
 		github: [];
+		microsoft: [];
 		internal: [email: string, password: string];
 	};
 
@@ -20,3 +21,4 @@
 	Sign in with Internal
 </button>
 <button onclick={async () => await signin('github')}> Sign in with Github </button>
+<button onclick={async () => await signin('microsoft')}> Sign in with Microsoft </button>

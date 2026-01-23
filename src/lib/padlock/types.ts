@@ -4,9 +4,9 @@ import type { providers as officialProviders } from "./providers/index.js"
 export type ProviderConfig = {
   clientId: string
   clientSecret: string
-  scope?: string
   scopes?: string[]
   redirectUri?: string
+  allowedTenants?: string[]
 }
 
 export type JwtCookieConfig = {
@@ -37,10 +37,10 @@ type DisjointRecord<A, B> = {
 }
 
 type DisjointProviders<A, B> = string extends keyof A
-  ? {}
+  ? object
   : string extends keyof B
-    ? {}
-    : DisjointRecord<A, B>
+  ? object
+  : DisjointRecord<A, B>
 
 
 
@@ -49,7 +49,7 @@ export type OAuthUser<TRaw = unknown> = {
   providerAccountId: string
   email: string | null
   name: string | null
-  avatarUrl: string | null
+  avatar: string | null
   raw: TRaw
 }
 
@@ -75,8 +75,9 @@ export type TrustedProvidersConfig = Partial<
 
 export interface OAuthProvider<TRaw = unknown> {
   id: string
-  authorizeUrl: string
-  tokenUrl: string
+  authorizeUrl: string | ((config: ProviderConfig) => string)
+  tokenUrl: string | ((config: ProviderConfig) => string)
+  defaultScopes?: string[]
 
   exchangeCode(params: {
     code: string
@@ -84,6 +85,7 @@ export interface OAuthProvider<TRaw = unknown> {
     clientId: string
     clientSecret: string
     redirectUri: string
+    providerConfig: ProviderConfig
   }): Promise<{ accessToken: string }>
 
   fetchUser(accessToken: string): Promise<OAuthUser<TRaw>>

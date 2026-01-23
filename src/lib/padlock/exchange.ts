@@ -18,6 +18,7 @@ export async function exchangeCode({
     codeVerifier: verifier,
     clientId: providerConfig.clientId,
     clientSecret: providerConfig.clientSecret,
-    redirectUri
+    redirectUri,
+    providerConfig
   })
 }

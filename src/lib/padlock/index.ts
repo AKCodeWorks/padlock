@@ -1,7 +1,6 @@
 export { Padlock } from "./padlock.js"
 export { trustedProvider } from "./trusted-provider.js"
-export { createSignin } from "./signin.js"
-export { signin } from "./client.js"
+export { createSignin } from "./create-signin.js"
 export type { PadlockJwtPayload } from "./jwt.js"
 export type {
   AuthorizeOptions,
